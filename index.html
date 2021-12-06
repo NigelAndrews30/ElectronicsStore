@@ -1,0 +1,577 @@
+<!--
+      Introduction
+      ------------
+
+      You are asked to create an online store in HTML, CSS, and JavaScript.
+      Please implement a store with all of the following requirements.
+
+      You may remove this comment and place all your HTML in this file.
+
+      Requirements:
+
+      1. Use a JavaScript or JSON file to describe your store's items, and each
+      item's details.  For example, the price, title, description, image URL, etc.
+      should all be properties on an Object, and these Objects should all be stored
+      in one or more Arrays, for example:
+
+      [
+        {
+          name: 'Name of product',
+          description: 'Full desc of this item...'
+          price: 100,                        // NOTE: prices are often done in whole cents and then formatted to dollars/cents
+          category: 'category1',             // category of this item
+          imageUrl: 'images/item-1234.jpg',  // relative URL to image of this item
+        },
+        ...
+      ]
+
+      2. Use JavaScript and DOM programming to build the items in your store (see
+      details below on requirements).  Instead of hard-coding everything in HTML,
+      write functions to generate the cards for each item programmatically (similar
+      to how you built the countries table UI in the previous assignment).
+
+      3. Include a header across the top with your store's name, a logo,
+      and use a different background colour, web font, etc. Your header should
+      include info about what the store is, what it sells, etc.  Use some images
+      to try and draw the user in. NOTE: place all your site's images in the
+      `src/images/` directory.
+
+      4. Below the header, a multi-column layout of items you can purchase in the
+      store.  You must have at least 10 items in your store, and at least 2
+      categories of items. For example, if you are selling clothing, you might
+      have categories for Men, Women, and Children, and each category would have
+      its own set of items.  Each item should include:
+      
+        - a picture of the item
+        - the item's name or title
+        - a complete description of the item
+        - a category (i.e., each item must belong to one or more categories)
+        - a price, formatted in Canadian Dollars (i.e., en-CA)
+      
+      Each item should be its own "card" (i.e., some kind of box around each item
+      separating one from the next, with suitable whitespace between).  The HTML
+      for these cards should be generated from your JavaScript or JSON data (see 1.
+      and 2. above).
+
+      5. A category menu or "sidebar" (left, right, or top depending on your design)
+      showing the different categories of items in your store.  If a
+      user clicks on one of the categories, use CSS and JavaScript to hide all
+      other items in the store (i.e., only show items for the chosen category).
+      Make sure you include a way to return to seeing all categories, and make it
+      obvious to the user that they are only seeing a partial list of items when
+      you filter by category (i.e., use CSS and HTML to change things somehow).
+
+      6. Below the store items, a footer with the name of the store, any relevant
+      links you need to give users.  Include links and icons to any social media
+      for your store (Facebook, Twitter, etc). NOTE: you don't have to create such
+      accounts, but you can provide links to imaginary accounts.
+
+      7. Use at least two different Web Fonts for your store.  The titles should
+      be different from any regular text.  Use a free font service like
+      https://fonts.google.com/ or any other that you choose.  You can also
+      experiment with different font sizes and colours to draw attention toward
+      or away from various parts of your design.
+
+      8. Pick a colour theme using a tool like https://colorhunt.co/ with at least
+      3 colours (primary, secondary, accent), and use them throughout your site
+      for backgrounds, borders, fonts. Your store page needs to look attractive
+      and marks will be given for good a good looking site.  No one will buy from
+      a store that looks like its owners aren't professional or don't care about
+      details.  Also make sure that the colour contrast in your site is suitable
+      for everyone to read.
+
+      9. Use modern CSS to help you achieve your layout.  For example, Flexbox
+      and CSS Grid can help you create professional looking layouts.  Here
+      are some guides to get you started:
+
+       - https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox
+       - https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout
+       
+      You are also welcome to use existing CSS libraries to help you with your layout,
+      but you must also include your own styles (i.e., you can't use a library
+      for everything in your design).
+
+      10. Make sure you don't use copyrighted materials from other sites.  If you use
+      icons, fonts, images, etc., make sure you are legally permitted to reuse them,
+      and include references to indicate where you got them. Some resources to consider:
+
+        - https://unsplash.com/ for images
+        - https://fontawesome.com/ for icons
+        - https://gallery.manypixels.co/ or https://undraw.co/illustrations for illustrations (SVG)
+
+      11. Make sure you reduce the download size of images you include in your
+      store.  Your images shouldn't be larger than 1M in size.  Users don't want to
+      download 10s or 100s of megabytes of data, especially on mobile.  You can use an
+      online tool like https://squoosh.app/ to help you reduce images.  You will
+      lose marks if your images aren't optimized for the web.
+
+      12. Make sure you have no JavaScript or other errors in your Dev Tools Console.
+      Run your site, and test all aspects of it with the Console open, and fix
+      any issues you encounter.
+
+      13. Make sure your code is properly indented and commented, and that you've used
+      good naming practices for variables, functions, ids, classes, etc.
+
+      14. Have fun!  Build something you'd be proud to show future employers in
+      interviews.  Take the time to properly design and implement a beautiful and
+      functional storefront.  Maybe it will inspire you to start your own online business?
+    -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="HandheldFriendly" content="true" />
+    <meta charset="UTF-8" />
+    <title>EFusion Electronics</title>
+
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS stylesheets  -->
+    <link type="text/css" rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/all.min.css" />
+  </head>
+
+  <body>
+    <header>
+      <!-- TOP HEADER -->
+      <div id="top-header">
+        <div class="container">
+          <ul class="header-links">
+            <li>
+              <a href="contact.html"><i class="fas fa-phone fa-lg"></i> Contact Us</a>
+            </li>
+            <li><a href="#help">Help</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- /TOP HEADER -->
+
+      <div id="main-header">
+        <div class="container">
+          <!-- row -->
+          <div class="row">
+            <!-- LOGO -->
+            <div class="col-md-3">
+              <div class="header-logo">
+                <a href="#" class="logo">
+                  <img src="images/logo.png" alt="" />
+                </a>
+              </div>
+            </div>
+            <!-- /LOGO -->
+
+            <!-- SEARCH BAR -->
+            <div class="col-md-6">
+              <div class="header-search">
+                <form>
+                  <select class="input-select">
+                    <option value="0">All Categories</option>
+                    <option value="1">Headphones</option>
+                    <option value="1">Laptops</option>
+                    <option value="1">Smartphones</option>
+                    <option value="1">Accessories</option>
+                  </select>
+                  <input class="input" placeholder="Search here" />
+                  <button class="search-btn">Search</button>
+                </form>
+              </div>
+            </div>
+            <!-- /SEARCH BAR -->
+
+            <!-- ACCOUNT -->
+            <div class="col-md-3 clearfix">
+              <div class="header-ctn">
+                <!-- Wishlist -->
+                <div>
+                  <a href="#">
+                    <i class="far fa-heart"></i>
+                    <span>Your Wishlist</span>
+                    <div class="qty">0</div>
+                  </a>
+                </div>
+                <!-- /Wishlist -->
+
+                <!-- Cart -->
+                <div class="cart-dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Your Cart</span>
+                    <div class="qty">0</div>
+                  </a>
+                </div>
+                <!-- /Cart -->
+
+                <!--- Account Dropdown-->
+                <div class="account-dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="far fa-user"></i>
+                    <span>Account</span>
+                  </a>
+                </div>
+                <!-- /Account Dropdown -->
+              </div>
+            </div>
+            <!-- /ACCOUNT -->
+          </div>
+          <!-- row -->
+        </div>
+        <!-- container -->
+      </div>
+      <!-- /MAIN HEADER -->
+    </header>
+    <!-- /HEADER -->
+
+    <!-- MAIN STORE SECTION -->
+    <main>
+      <!-- container -->
+      <div class="container">
+        <!-- row -->
+        <div class="row">
+          <!-- Aside Bar-->
+          <aside class="col-md-3">
+            <!-- Categories -->
+            <section class="aside1">
+              <h3 class="aside-title">Categories</h3>
+              <nav class="nav-style">
+                <ul class="category-list">
+                  <div class="category">
+                    <li><a id="all-categories" href="#">All Categories</a></li>
+                  </div>
+
+                  <div class="category">
+                    <li><a id="headphones" href="#">Headphones</a></li>
+                  </div>
+
+                  <div class="category">
+                    <li><a id="laptops" href="#">Laptops</a></li>
+                  </div>
+
+                  <div class="category">
+                    <li><a id="smartphones" href="#">Smartphones</a></li>
+                  </div>
+
+                  <div class="category">
+                    <li><a id="accessories" href="#">Accessories</a></li>
+                  </div>
+                </ul>
+              </nav>
+            </section>
+            <!-- /Categories -->
+
+            <!-- Brands -->
+            <section class="aside2">
+              <h3 class="aside-title">Brands</h3>
+              <div class="checkbox-style">
+                <div class="checkbox">
+                  <input type="checkbox" id="samsung" name="brands" value="samsung" />
+                  <label for="samsung">Samsung</label>
+                </div>
+
+                <div class="checkbox">
+                  <input type="checkbox" id="apple" name="brands" value="apple" />
+                  <label for="apple">Apple</label>
+                </div>
+
+                <div class="checkbox">
+                  <input type="checkbox" id="bose" name="brands" value="bose" />
+                  <label for="bose">Bose</label>
+                </div>
+
+                <div class="checkbox">
+                  <input type="checkbox" id="dell" name="brands" value="dell" />
+                  <label for="dell">Dell</label>
+                </div>
+
+                <div class="checkbox">
+                  <input type="checkbox" id="lg" name="brands" value="lg" />
+                  <label for="lg">LG</label>
+                </div>
+
+                <div class="checkbox">
+                  <input type="checkbox" id="hp" name="brands" value="hp" />
+                  <label for="hp">HP</label>
+                </div>
+
+                <div class="checkbox">
+                  <input type="checkbox" id="sony" name="brands" value="sony" />
+                  <label for="sony">Sony</label>
+                </div>
+              </div>
+            </section>
+
+            <!-- /Brands -->
+
+            <!-- Best Sellers -->
+            <section class="aside3">
+              <h3 class="aside-title">Best Sellers</h3>
+              <div class="product-aside">
+                <div class="product-img">
+                  <img src="images/Bose QCII.png" alt="" width="150px" height="150px" />
+                </div>
+                <div class="product-body">
+                  <p class="product-category">Headphones</p>
+                  <h3 class="product-name"><a href="#">Bose QCII</a></h3>
+                  <h4 class="product-price">$259.99</h4>
+                </div>
+              </div>
+
+              <div class="product-aside">
+                <div class="product-img">
+                  <img src="images/Dell - Latitude 5300.jpg" alt="" width="150px" height="150px" />
+                </div>
+                <div class="product-body">
+                  <p class="product-category">Laptops</p>
+                  <h3 class="product-name"><a href="#">Dell Latitude 5300</a></h3>
+                  <h4 class="product-price">$1059.99</h4>
+                </div>
+              </div>
+
+              <div class="product-aside">
+                <div class="product-img">
+                  <img
+                    src="images/Sony - WH-1000XM3 Wireless Noise Cancelling Over-the-Ear Headphones - Silver.jpg"
+                    alt=""
+                    width="150px"
+                    height="150px"
+                  />
+                </div>
+                <div class="product-body">
+                  <p class="product-category">Headphones</p>
+                  <h3 class="product-name"><a href="#">Sony WH-1000MX3</a></h3>
+                  <h4 class="product-price">$299.99</h4>
+                </div>
+              </div>
+            </section>
+            <!-- /Best Sellers -->
+          </aside>
+          <!-- /Aside Bar-->
+
+          <!-- Products -->
+          <div id="products" class="col-md-9">
+            <!-- Store Top Filter-->
+            <h3 class="category-header">All Categories</h3>
+            <!-- row -->
+            <div class="row">
+              <!--PRODUCTS DONE IN JS FILE-->
+            </div>
+            <!-- /row -->
+
+            <!-- store bottom filter -->
+            <div class="store-filter clearfix">
+              <span class="store-qty">Showing 11 of 11 products</span>
+              <ul class="store-page">
+                <li class="active">1</li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li>
+                  <a href="#"><i class="fa fa-angle-right"></i></a>
+                </li>
+              </ul>
+            </div>
+            <!-- /store bottom filter -->
+          </div>
+          <!-- /Products -->
+        </div>
+        <!-- /row -->
+      </div>
+      <!-- /container -->
+    </main>
+    <!-- /MAIN STORE SECTION -->
+
+    <!-- SUBSCRIBE -->
+    <section class="newsletter">
+      <!-- container -->
+      <div class="container">
+        <!-- row -->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="subscribe">
+              <p>Sign Up for the <strong>NEWSLETTER</strong></p>
+              <form
+                id="subscribe-form"
+                class="needs-validation"
+                action="https://formspree.io/f/mrgoyyjd"
+                method="POST"
+              >
+                <input
+                  class="input"
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Enter Your Email"
+                  autocomplete="email"
+                  required
+                />
+                <div class="invalid-feedback">
+                  Enter a valid email address.
+                </div>
+                <button type="submit" action="submit" value="Subscribe" class="newsletter-btn">
+                  <i class="fas fa-envelope"></i> Subscribe
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- /row -->
+      </div>
+      <!-- /container -->
+    </section>
+    <!-- /SUBSCRIBE -->
+
+    <!-- FOOTER -->
+    <footer id="main-footer">
+      <!-- top footer -->
+      <section class="top-footer">
+        <!-- container -->
+        <div class="container">
+          <!-- row -->
+          <div class="row">
+            <div class="col-md-3 col-xs-6">
+              <div class="footer">
+                <h3 class="footer-title">Follow Us</h3>
+                <ul class="footer-links">
+                  <li>
+                    <a href="#"
+                      ><i class="fab fa-instagram fa-lg"></i>instagram.com/efusionelectronics</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#"
+                      ><i class="fas fa-envelope fa-lg"></i>efusionelectronics@gmail.com</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#"><i class="fab fa-twitter fa-lg"></i>@EfusionElectronics</a>
+                  </li>
+                  <li>
+                    <a href="#"
+                      ><i class="fab fa-facebook-square fa-lg"></i
+                      >facebook.com/efusionelectronics</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-md-3 col-xs-6">
+              <div class="footer">
+                <h3 class="footer-title">Categories</h3>
+                <ul class="footer-links">
+                  <li><a id="all-categories" href="#">All Categories</a></li>
+                  <li><a id="headphones" href="#">Headphones</a></li>
+                  <li><a id="laptops" href="#">Laptops</a></li>
+                  <li><a id="smartphones" href="#">Smartphones</a></li>
+                  <li><a id="accessories" href="#">Accessories</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="clearfix visible-xs"></div>
+
+            <div class="col-md-3 col-xs-6">
+              <div class="footer">
+                <h3 class="footer-title">Information</h3>
+                <ul class="footer-links">
+                  <li><a href="contact.html">Contact Us</a></li>
+                  <li><a href="#">About Us</a></li>
+                  <li><a href="#">Privacy Policy</a></li>
+                  <li><a href="#">Orders and Returns</a></li>
+                  <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-md-3 col-xs-6">
+              <div class="footer">
+                <h3 class="footer-title">Service</h3>
+                <ul class="footer-links">
+                  <li><a href="#">My Account</a></li>
+                  <li><a href="#">View Cart</a></li>
+                  <li><a href="#">Wishlist</a></li>
+                  <li><a href="#">Track My Order</a></li>
+                  <li><a id="help" href="#">Help</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- /row -->
+        </div>
+        <!-- /container -->
+      </section>
+      <!-- /top footer -->
+
+      <!-- bottom footer -->
+      <div id="bottom-footer" class="section">
+        <div class="container">
+          <!-- row -->
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <ul class="footer-payments">
+                <li>
+                  <a href="#"><i class="fab fa-cc-visa fa-lg"></i></a>
+                </li>
+                <li>
+                  <a href="#"><i class="far fa-credit-card fa-lg"></i></a>
+                </li>
+                <li>
+                  <a href="#"><i class="fab fa-cc-paypal fa-lg"></i></a>
+                </li>
+                <li>
+                  <a href="#"><i class="fab fa-cc-mastercard fa-lg"></i></a>
+                </li>
+              </ul>
+              <span class="copyright">
+                Copyright &copy;
+                <script>
+                  document.write(new Date().getFullYear());
+                </script>
+                | All rights reserved | EFusion Electronics<sup>TM</sup>
+              </span>
+            </div>
+          </div>
+          <!-- /row -->
+        </div>
+        <!-- /container -->
+      </div>
+      <!-- /bottom footer -->
+    </footer>
+    <!-- /FOOTER -->
+
+    <!-- JS -->
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/script.js"></script>
+    <script src="js/products.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
